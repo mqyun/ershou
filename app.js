@@ -4,9 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+var userRoutes = require('./routes/userRoutes');
+var adminRoutes = require('./routes/adminRoutes');
 
 var app = express();
 
@@ -22,8 +23,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use(session({
+  resave: true,
+  saveUninitialized: false,
+  secret: 'secret'
+}));
+app.use(function(req, res, next) {
+  // 用户真实名字
+  res.locals.name = req.session.name || '';
+  // 用户的id
+  res.locals.uid = req.session.uid || '';
+  // 用户的类型
+  res.locals.usertype = req.session.usertype || '';
+  // 用户刚添加产品的id
+  res.locals.insertId = req.session.insertId || '';
+  next();
+});
+
+app.use('/', userRoutes);
+app.use('/admin', adminRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
