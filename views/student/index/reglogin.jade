@@ -1,0 +1,61 @@
+extends ../layout
+
+block nav
+	+topnav
+
+block content
+	+smallnav('登录·注册')
+	section.properti-detsil.register
+		.container
+			.row
+				.col-sm-12
+					.row
+						.col-sm-6
+							.regi-sec
+								span.regi-tag 登录
+								form
+									ul
+										li
+											label
+												| 账号(学号)
+												input(type='text', name='account')
+										li
+											label
+												| 密码
+												input(type='password', name='password')
+										li
+											input.btn.btn-login(type='button', value='登录')
+						.col-sm-6
+							.regi-sec
+								span.regi-tag 注册
+								form
+									ul
+										li
+											label
+												| 账号(学号)
+												input(type='text', name='reg-account')
+										li
+											label
+												| 密码
+												input(type='password', name='reg-password')
+										li
+											label
+												| 重复密码
+												input(type='password', name='reg-repassword')
+										li
+											label
+												| 联系电话
+												input(type='text', name='reg-phone')
+										li
+											label
+												| 昵称
+												input(type='text', name='reg-nicheng')
+										li
+											label
+												| 真实姓名
+												input(type='text', name='reg-name')
+										li
+											input.btn.btn-reg(type='button', value='注册')
+
+block footer
+	+footer

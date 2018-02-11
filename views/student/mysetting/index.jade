@@ -1,0 +1,70 @@
+extends ../layout
+
+block nav
+	+topnav
+
+block content
+	+smallnav('我的信息')
+	section.properti-detsil.register
+		.container
+			.row
+				.col-sm-12
+					.row
+						.col-sm-7
+							.regi-sec
+								span.regi-tag 个人信息
+								.pull-right
+									button.btn.btn-primary.btn-toxiugaigrxx 修改
+								form
+									ul
+										li
+											label
+												| 账号(学号)
+												input(type='text', name='xggrxx-account', value= userInfo.account, disabled)
+										li
+											label
+												| 联系电话
+												input.canxginput(type='text', name='xggrxx-phone', value= userInfo.phone, disabled)
+										li
+											label
+												| 昵称
+												input.canxginput(type='text', name='xggrxx-nicheng', value= userInfo.nicheng, disabled)
+										li
+											label
+												| 真实姓名
+												input.canxginput(type='text', name='xggrxx-name', value= userInfo.name, disabled)
+										li
+											label
+												| 个性签名
+												input.canxginput(type='text', name='xggrxx-qianming', value='#{userInfo.qianming?userInfo.qianming:"您还未设置签名"}', disabled)
+										li.xggrxx-bottombtnli(style='display: none;')
+											.col-sm-6
+												input.btn.btn-xggrxx(type='button', value='保存')
+											.col-sm-6
+												input.btn.btn-xggrxxqx(type='button', value='取消')
+						.col-sm-5
+							.regi-sec
+								span.regi-tag 头像
+								form(method='post', action='/uploadTouXiang', enctype='multipart/form-data')
+									ul
+										li
+											label
+												| 头像
+												- if (userInfo.touxiang)
+													img(src= userInfo.touxiang, alt="")
+												- else
+													p 您还未上传头像
+										li
+											label
+												| 上传
+												input(type='file', name='touxiang')
+										li
+											input.btn.btn-login(type='submit', value='#{userInfo.touxiang?"重新上传":"上传"}')
+block footer
+	+footer
+
+block js
+	script.
+		$(function() {
+			$('.topnavli').eq(3).addClass('active');
+		});

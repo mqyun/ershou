@@ -21,6 +21,15 @@ module.exports = {
       callback(err);
     });
   },
+  getStudentInfo: function(id, callback) {
+    var sql = "select * from student where id = ?;";
+    db.exec(sql, id, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
   // 修改头像
   updateTouXiang: function(touxiangurl, id, callback) {
     var sql = "update student set touxiang = ? where id = ?;";
@@ -32,9 +41,9 @@ module.exports = {
     });
   },
   // 修改昵称和签名
-  updateNiQian: function(nicheng, qianming, id, callback) {
-    var sql = "update student set nicheng = ?, qianming = ? where id = ?;";
-    db.exec(sql, [nicheng, qianming, id], function(err) {
+  updateNiQian: function(phone, nicheng, name, qianming, id, callback) {
+    var sql = "update student set phone = ?, nicheng = ?, name = ?, qianming = ? where id = ?;";
+    db.exec(sql, [phone, nicheng, name, qianming, id], function(err) {
       if (err) {
         callback(err);
       }

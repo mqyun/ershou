@@ -1,0 +1,37 @@
+- if (wupinList.length > 0)
+	ul.row
+		li.col-sm-4
+			span.tag.font-montserrat.rent FOR RENT
+			section
+				.img
+					img.img-responsive(src='/student/images/img-1.jpg', alt='')
+					.over-proper
+						a.btn.font-montserrat(href='#.') more details
+				ul.home-in
+					li
+						span
+							i.fa.fa-home
+							|  20,000 Acres
+					li
+						span
+							i.fa.fa-bed
+							|  3 Bedrooms
+					li
+						span
+							i.fa.fa-tty
+							|  3 Bathrooms
+				.detail-sec
+					a.font-montserrat(href='#.') sweet home for small family
+					span.locate
+						i.fa.fa-map-marker
+						|  Boston,USA
+					p
+						| Till the one day when the lady met this fellow and they knew it was much more than
+					.share-p
+						span.price.font-montserrat $ 256,596
+						i.fa.fa-star-o
+						i.fa.fa-share-alt
+- else
+	.no-datacon
+		.no-data
+			img(src='/public/img/no-data.png')

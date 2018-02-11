@@ -1,0 +1,40 @@
+extends ../layout
+
+block nav
+	+topnav
+
+block content
+	+smallnav('我的物品')
+	section.what-we-do.properties.white-bg
+		.container
+			.tittle
+				img(src='/student/images/head-top.png', alt='')
+			div(role='tabpanel')
+				ul.nav.nav-tabs(role='tablist')
+					li.active.getWeiChuShouWuPin(role='presentation')
+						a(href='#what-we', aria-controls='home', role='tab', data-toggle='tab')
+							i.fa.fa-bullhorn
+							span.font-montserrat 未出售物品
+					li.getYiChuShouWuPin(role='presentation')
+						a(href='#mission', aria-controls='profile', role='tab', data-toggle='tab')
+							i.fa.fa-rocket
+							span.font-montserrat 已出售物品
+					li.getMyYuDing(role='presentation')
+						a(href='#vision', aria-controls='messages', role='tab', data-toggle='tab')
+							i.fa.fa-lightbulb-o
+							span.font-montserrat 我的预定
+					li.getAddWuPinView(role='presentation')
+						a(href='#vision2', aria-controls='messages', role='tab', data-toggle='tab')
+							i.fa.fa-user
+							span.font-montserrat 发布物品
+				.tab-content#mywupin-content
+
+block footer
+	+footer
+
+block js
+	script.
+		$(function() {
+			$('.topnavli').eq(3).addClass('active');
+			$('.getWeiChuShouWuPin').click();
+		});

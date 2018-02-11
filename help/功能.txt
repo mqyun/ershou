@@ -43,7 +43,7 @@ price                   物品价格
 fenleiid                所属分类
 studentid               所属用户id
 gmstudentid             购买用户id
-img                     物品图片
+img(NULL)               物品图片
 
 预定表(yuding)
 id                      预定ID

@@ -30,7 +30,7 @@ app.use(session({
 }));
 app.use(function(req, res, next) {
   // 用户真实名字
-  res.locals.name = req.session.name || '';
+  res.locals.nicheng = req.session.nicheng || '';
   // 用户的id
   res.locals.uid = req.session.uid || '';
   // 用户的类型

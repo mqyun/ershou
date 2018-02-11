@@ -1,0 +1,191 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		title= title
+		meta(name='keywords', content='HTML5,CSS3,HTML,Template,Multi-Purpose,M_Adnan,Corporate Theme,Realtor | Real Estate HTML5 Templates')
+		meta(name='description', content='Realtor | Real Estate HTML5 Template')
+		meta(name='author', content='M_Adnan')
+		link(href='/student/css/bootstrap.min.css', rel='stylesheet', type='text/css')
+		link(href='/student/css/main.css', rel='stylesheet', type='text/css')
+		link(href='/student/css/style.css', rel='stylesheet', type='text/css')
+		link(href='/student/css/animate.css', rel='stylesheet', type='text/css')
+		link(href='/student/css/responsive.css', rel='stylesheet', type='text/css')
+		link(href='/student/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+		link(href='/public/css/public.css', rel='stylesheet')
+		link(href='/public/css/sweet-alert.css', rel='stylesheet')
+		block css
+	body
+		#wrap.home-1
+			mixin topnav
+				.top-bar
+					.container
+						ul.left-bar-side
+							li
+								p
+									i.fa.fa-phone
+									| 联系我们: +01 123 456 78
+								span |
+							- if (nicheng)
+								li
+									p
+										a(href='javascript:;')
+											i.fa.fa-lock
+											| 欢迎您，#{nicheng}
+									span |
+							- else
+								li
+									p
+										a(href='/reglogin')
+											i.fa.fa-lock
+											| 登录 / 注册
+									span |
+				header.sticky
+					.container
+						.logo
+							a(href='#.')
+								img(src='/student/images/logo.png', alt='')
+						nav
+							ul.ownmenu
+								li.topnavli
+									a(href='/') 首页
+								li.topnavli
+									a(href='javascript:;') 分类查看
+									ul.dropdown
+										li
+											a(href='javascript:;') 分类名
+										li
+											a(href='javascript:;') 分类名
+										li
+											a(href='javascript:;') 分类名
+								li.topnavli
+									a(href='javascript:;') 寻物信息
+								- if (nicheng)
+									li.topnavli
+										a(href='javascript:;') 个人管理
+										ul.dropdown
+											li
+												a(href='/mysetting') 个人信息
+											li
+												a(href='/mywupin') 物品管理
+											li
+												a(href='/logout') 退出
+			mixin topslide
+				#banner
+					.flex-banner
+						ul.slides
+							li
+								img(src='/student/images/slider-img-1.jpg', alt='')
+							li
+								img(src='/student/images/slider-img-2.jpg', alt='')
+					.finder
+						.container
+							h1 欢迎来到岭师跳蚤市场
+							.find-sec
+								ul.row
+									li.col-sm-6
+										label 输入您要查找的物品
+										input(style='width: 100%; height: 39px;', type='text')
+									li.col-sm-6
+										input.btn(type='submit', value='查找')
+			mixin smallnav(navtit)
+				.sub-banner
+					.overlay
+						.container
+							h1 #{navtit}
+							ol.breadcrumb
+								li.pull-left
+								li
+									a(href='/') 首页
+								li.active #{navtit}
+			mixin toptuijian
+				section.property-slide
+					.prot-slide
+						.plots
+							.row
+								.col-xs-4
+									a(href='#.')
+										img.img-responsive(src='/student/images/propt-img-1.jpg', alt='')
+								.col-xs-8
+									.pri-info
+										span.sale For Sale
+										a.f-mont(href='#.') $ 13,512,002 3 Bed Room At Newyork
+										p
+											i.fa.fa-map-marker
+											|  Down Street
+										.auther
+											img(src='/student/images/auther-1.jpg', alt='')
+											h6 Anderia jus
+						.plots
+							.row
+								.col-xs-4
+									a(href='#.')
+										img.img-responsive(src='/student/images/propt-img-1.jpg', alt='')
+								.col-xs-8
+									.pri-info
+										span.sale For Sale
+										a.f-mont(href='#.') $ 13,512,002 3 Bed Room At Newyork
+										p
+											i.fa.fa-map-marker
+											|  Down Street
+										.auther
+											img(src='/student/images/auther-1.jpg', alt='')
+											h6 Anderia jus
+						.plots
+							.row
+								.col-xs-4
+									a(href='#.')
+										img.img-responsive(src='/student/images/propt-img-2.jpg', alt='')
+								.col-xs-8
+									.pri-info
+										span.sale For Sale
+										a.f-mont(href='#.') $ 13,512,002 3 Bed Room At Newyork
+										p
+											i.fa.fa-map-marker
+											|  Down Street
+										.auther
+											img(src='/student/images/auther-1.jpg', alt='')
+											h6 Anderia jus
+						.plots
+							.row
+								.col-xs-4
+									a(href='#.')
+										img.img-responsive(src='/student/images/propt-img-3.jpg', alt='')
+								.col-xs-8
+									.pri-info
+										span.sale For Sale
+										a.f-mont(href='#.') $ 13,512,002 3 Bed Room At Newyork
+										p
+											i.fa.fa-map-marker
+											|  Down Street
+										.auther
+											img(src='/student/images/auther-1.jpg', alt='')
+											h6 Anderia jus
+			block nav
+			
+			block content
+				
+			mixin footer
+				.rights
+					.container
+						p.font-montserrat © 2018 岭南跳蚤市场
+			block footer
+				
+		script(src='/student/js/jquery-1.11.0.min.js')
+		script(src='/student/js/wow.min.js')
+		script(src='/student/js/bootstrap-select.js')
+		script(src='/student/js/bootstrap-select.js')
+		script(src='/student/js/bootstrap.min.js')
+		script(src='/student/js/jquery.stellar.js')
+		script(src='/student/js/jquery.flexslider-min.js')
+		script(src='/student/js/owl.carousel.min.js')
+		script(src='/student/js/jquery.sticky.js')
+		script(src='/student/js/own-menu.js')
+		script(src='/student/js/jquery.nouislider.min.js')
+		script(src='/student/js/main.js')
+		script(src='/public/js/sweet-alert.min.js')
+		script(src='/public/layer/layer.js')
+		script(src='/public/js/public.js')
+		script(src='/ershou/student.js')
+		block js
