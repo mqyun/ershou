@@ -108,3 +108,13 @@ $(document).on('click', '.getYiChuShouWuPin', function() {
 		}
 	});
 });
+
+// 添加物品页面
+$(document).on('click', '.getAddWuPinView', function() {
+	ajaxPost('/addWuPinView', {}, function(result) {
+		if (result.success) {
+			$('#mywupin-content').html('');
+			$('#mywupin-content').append(result.view);
+		}
+	});
+});

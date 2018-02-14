@@ -185,10 +185,32 @@ router.post('/getWuPin', function(req, res, next) {
     res.render('student/mysetting/_WuPinList', {
       wupinList: wupinList
     }, function(err, html) {
+      if (err) {
+        res.json({
+          'error': err
+        });
+        return next(err);
+      }
       res.json({
         'success': true,
         'view': html
       });
+    });
+  });
+});
+
+// 获取添加物品页面
+router.post('/addWuPinView', function(req, res, next) {
+  res.render('student/mysetting/_AddWuPin', {}, function(err, html) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    res.json({
+      'success': true,
+      'view': html
     });
   });
 });
