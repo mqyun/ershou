@@ -1,209 +1,39 @@
 extends ../layout
 
 block nav
-	+topnav
-	+topslide
-	+toptuijian
+  +topnav(true)
+  +topslide
 
 block content
-	section.properties
-		.container
-			.tittle
-				img(src='/student/images/head-top.png', alt='')
-				h3 最新二手物品
-			ul.row
-				li.col-sm-4
-					span.tag.font-montserrat.rent FOR RENT
-					section
-						.img
-							img.img-responsive(src='/student/images/img-1.jpg', alt='')
-							.over-proper
-								a.btn.font-montserrat(href='#.') more details
-						ul.home-in
-							li
-								span
-									i.fa.fa-home
-									|  20,000 Acres
-							li
-								span
-									i.fa.fa-bed
-									|  3 Bedrooms
-							li
-								span
-									i.fa.fa-tty
-									|  3 Bathrooms
-						.detail-sec
-							a.font-montserrat(href='#.') sweet home for small family
-							span.locate
-								i.fa.fa-map-marker
-								|  Boston,USA
-							p
-								| Till the one day when the lady met this fellow and they knew it was much more than
-							.share-p
-								span.price.font-montserrat $ 256,596
-								i.fa.fa-star-o
-								i.fa.fa-share-alt
-				li.col-sm-4
-					span.tag.font-montserrat.rent FOR RENT
-					section
-						.img
-							img.img-responsive(src='/student/images/img-2.jpg', alt='')
-							.over-proper
-								a.btn.font-montserrat(href='#.') more details
-						ul.home-in
-							li
-								span
-									i.fa.fa-home
-									|  20,000 Acres
-							li
-								span
-									i.fa.fa-bed
-									|  3 Bedrooms
-							li
-								span
-									i.fa.fa-tty
-									|  3 Bathrooms
-						.detail-sec
-							a.font-montserrat(href='#.') sweet home for small family
-							span.locate
-								i.fa.fa-map-marker
-								|  Boston,USA
-							p
-								| Till the one day when the lady met this fellow and they knew it was much more than
-							.share-p
-								span.price.font-montserrat $ 256,596
-								i.fa.fa-star-o
-								i.fa.fa-share-alt
-				li.col-sm-4
-					span.tag.font-montserrat.sale FOR SALE
-					section
-						.img
-							img.img-responsive(src='/student/images/img-3.jpg', alt='')
-							.over-proper
-								a.btn.font-montserrat(href='#.') more details
-						ul.home-in
-							li
-								span
-									i.fa.fa-home
-									|  20,000 Acres
-							li
-								span
-									i.fa.fa-bed
-									|  3 Bedrooms
-							li
-								span
-									i.fa.fa-tty
-									|  3 Bathrooms
-						.detail-sec
-							a.font-montserrat(href='#.') sweet home for small family
-							span.locate
-								i.fa.fa-map-marker
-								|  Boston,USA
-							p
-								| Till the one day when the lady met this fellow and they knew it was much more than
-							.share-p
-								span.price.font-montserrat $ 256,596
-								i.fa.fa-star-o
-								i.fa.fa-share-alt
-				li.col-sm-4
-					span.tag.font-montserrat.rent FOR RENT
-					section
-						.img
-							img.img-responsive(src='/student/images/img-4.jpg', alt='')
-							.over-proper
-								a.btn.font-montserrat(href='#.') more details
-						ul.home-in
-							li
-								span
-									i.fa.fa-home
-									|  20,000 Acres
-							li
-								span
-									i.fa.fa-bed
-									|  3 Bedrooms
-							li
-								span
-									i.fa.fa-tty
-									|  3 Bathrooms
-						.detail-sec
-							a.font-montserrat(href='#.') sweet home for small family
-							span.locate
-								i.fa.fa-map-marker
-								|  Boston,USA
-							p
-								| Till the one day when the lady met this fellow and they knew it was much more than
-							.share-p
-								span.price.font-montserrat $ 2,956,596
-								i.fa.fa-star-o
-								i.fa.fa-share-alt
-				li.col-sm-4
-					span.tag.font-montserrat.sale FOR SALE
-					section
-						.img
-							img.img-responsive(src='/student/images/img-5.jpg', alt='')
-							.over-proper
-								a.btn.font-montserrat(href='#.') more details
-						ul.home-in
-							li
-								span
-									i.fa.fa-home
-									|  20,000 Acres
-							li
-								span
-									i.fa.fa-bed
-									|  3 Bedrooms
-							li
-								span
-									i.fa.fa-tty
-									|  3 Bathrooms
-						.detail-sec
-							a.font-montserrat(href='#.') sweet home for small family
-							span.locate
-								i.fa.fa-map-marker
-								|  Boston,USA
-							p
-								| Till the one day when the lady met this fellow and they knew it was much more than
-							.share-p
-								span.price.font-montserrat $ 256,596
-								i.fa.fa-star-o
-								i.fa.fa-share-alt
-				li.col-sm-4
-					span.tag.font-montserrat.rent FOR RENT
-					section
-						.img
-							img.img-responsive(src='/student/images/img-6.jpg', alt='')
-							.over-proper
-								a.btn.font-montserrat(href='#.') more details
-						ul.home-in
-							li
-								span
-									i.fa.fa-home
-									|  20,000 Acres
-							li
-								span
-									i.fa.fa-bed
-									|  3 Bedrooms
-							li
-								span
-									i.fa.fa-tty
-									|  3 Bathrooms
-						.detail-sec
-							a.font-montserrat(href='#.') sweet home for small family
-							span.locate
-								i.fa.fa-map-marker
-								|  Boston,USA
-							p
-								| Till the one day when the lady met this fellow and they knew it was much more than
-							.share-p
-								span.price.font-montserrat $ 2,956,596
-								i.fa.fa-star-o
-								i.fa.fa-share-alt
+  section.properties
+    .container
+      .tittle
+        img(src='/student/images/head-top.png', alt='')
+        h3 最新二手物品
+      ul.row
+        each wupinitem in wupinList
+          li.col-sm-4
+            each fenleiitem in fenleiList
+              if (wupinitem.fenleiid == fenleiitem.id)
+                span.tag.font-montserrat.rent= fenleiitem.name
+            section
+              .img
+                img.img-responsive(src= wupinitem.img, alt='')
+                .over-proper
+                  a.btn.font-montserrat(href='/detail/' + wupinitem.id) 查看详情
+              .detail-sec
+                a.font-montserrat(href='javascript:;') #{wupinitem.name}
+                p #{wupinitem.introduce.substring(0, 40)}
+                  - if (wupinitem.introduce.length > 40)
+                    | ......
+                .share-p
+                  span.price.font-montserrat ￥#{wupinitem.price}
 
 block footer
-	+footer
+  +footer
 
 block js
-	script.
-		$(function() {
-			$('.topnavli').eq(0).addClass('active');
-		});
+  script.
+    $(function() {
+      $('.topnavli').eq(0).addClass('active');
+    });

@@ -41,10 +41,20 @@ module.exports = {
       callback(err);
     });
   },
-  // 获取某个分类下的所有物品
-  getWuPin: function(fenleiid, callback) {
-    var sql = "select wupin.*, student.nicheng, student.phone from wupin left join student on wupin.studentid = student.id where fenleiid = ?;";
-    db.exec(sql, fenleiid, function(err, rows) {
+  // 获取所有物品
+  getWuPin: function(callback) {
+    var sql = "select wupin.*, student.nicheng, student.phone from wupin left join student on wupin.studentid = student.id;";
+    db.exec(sql, '', function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 获取某个物品
+  getThisWuPin: function(id, callback) {
+    var sql = "select * from wupin where id = ?;";
+    db.exec(sql, id, function(err, rows) {
       if (err) {
         callback(err);
       }

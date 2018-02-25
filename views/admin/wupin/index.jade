@@ -1,0 +1,42 @@
+extends ../layout
+
+block nav
+  +topnav
+  +leftnav
+
+block content
+  section#main-content
+    section.wrapper
+      .row
+        .col-lg-12
+          section.panel
+            header.panel-heading
+              | 物品管理
+            .panel-body
+              table.table.table-striped.table-advance.table-hover
+                thead
+                  tr
+                    th 物品名
+                    th 所属分类
+                    th 价格(元)
+                    th 用户昵称
+                    th 用户电话
+                    th
+                tbody.info-tbody
+                  each wupinitem in wupinList
+                    tr
+                      td #{wupinitem.name}
+                      each fenleiitem in fenleiList
+                        - if (fenleiitem.id == wupinitem.fenleiid)
+                          td #{fenleiitem.name}
+                      td #{wupinitem.price}
+                      td #{wupinitem.nicheng}
+                      td #{wupinitem.phone}
+                      td
+                        button.btn.btn-danger.btn-xs.btn-deletewupin(data-wupinid= wupinitem.id)
+                          i.icon-pencil 删除物品
+block js
+  script.
+    $(function() {
+      $('.leftli-wupin').addClass('active');
+    });

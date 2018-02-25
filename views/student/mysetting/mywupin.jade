@@ -23,6 +23,10 @@ block content
 						a(href='#vision', aria-controls='messages', role='tab', data-toggle='tab')
 							i.fa.fa-lightbulb-o
 							span.font-montserrat 我的预定
+					li.getMyGouMai(role='presentation')
+						a(href='#vision', aria-controls='messages', role='tab', data-toggle='tab')
+							i.fa.fa-lightbulb-o
+							span.font-montserrat 我买到的物品
 					li.getAddWuPinView(role='presentation')
 						a(href='#vision2', aria-controls='messages', role='tab', data-toggle='tab')
 							i.fa.fa-user
@@ -35,6 +39,6 @@ block footer
 block js
 	script.
 		$(function() {
-			$('.topnavli').eq(3).addClass('active');
+			$('.topnavli').eq(2).addClass('active');
 			$('.getWeiChuShouWuPin').click();
 		});

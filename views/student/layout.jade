@@ -18,7 +18,7 @@ html(lang='en')
 		block css
 	body
 		#wrap.home-1
-			mixin topnav
+			mixin topnav(isfenlei)
 				.top-bar
 					.container
 						ul.left-bar-side
@@ -45,23 +45,21 @@ html(lang='en')
 					.container
 						.logo
 							a(href='#.')
-								img(src='/student/images/logo.png', alt='')
+								img(src='/student/images/logo.png', style='height: 40px;', alt='')
 						nav
 							ul.ownmenu
 								li.topnavli
 									a(href='/') 首页
+								- if (isfenlei)
+									li.topnavli
+										a(href='javascript:;') 分类查看
+										ul.dropdown
+											each fenleiitem in fenleiList
+												li
+													a(href='/fenleiSelList/' + fenleiitem.id)= fenleiitem.name
 								li.topnavli
-									a(href='javascript:;') 分类查看
-									ul.dropdown
-										li
-											a(href='javascript:;') 分类名
-										li
-											a(href='javascript:;') 分类名
-										li
-											a(href='javascript:;') 分类名
-								li.topnavli
-									a(href='javascript:;') 寻物信息
-								- if (nicheng)
+									a(href='/xunwuInfo') 寻物信息
+								- if (nicheng && usertype == 'student')
 									li.topnavli
 										a(href='javascript:;') 个人管理
 										ul.dropdown
@@ -71,6 +69,9 @@ html(lang='en')
 												a(href='/mywupin') 物品管理
 											li
 												a(href='/logout') 退出
+								- if (usertype == 'admin')
+									li.topnavli
+										a(href='/admin/fenlei') 返回后台管理
 			mixin topslide
 				#banner
 					.flex-banner
@@ -83,12 +84,13 @@ html(lang='en')
 						.container
 							h1 欢迎来到岭师跳蚤市场
 							.find-sec
-								ul.row
-									li.col-sm-6
-										label 输入您要查找的物品
-										input(style='width: 100%; height: 39px;', type='text')
-									li.col-sm-6
-										input.btn(type='submit', value='查找')
+								form(action='/wupinlist', method='post')
+									ul.row
+										li.col-sm-6
+											label 输入您要查找的物品
+											input(style='width: 100%; height: 39px;', type='text', name='wupinname')
+										li.col-sm-6
+											input.btn(type='submit', value='查找')
 			mixin smallnav(navtit)
 				.sub-banner
 					.overlay
@@ -99,69 +101,6 @@ html(lang='en')
 								li
 									a(href='/') 首页
 								li.active #{navtit}
-			mixin toptuijian
-				section.property-slide
-					.prot-slide
-						.plots
-							.row
-								.col-xs-4
-									a(href='#.')
-										img.img-responsive(src='/student/images/propt-img-1.jpg', alt='')
-								.col-xs-8
-									.pri-info
-										span.sale For Sale
-										a.f-mont(href='#.') $ 13,512,002 3 Bed Room At Newyork
-										p
-											i.fa.fa-map-marker
-											|  Down Street
-										.auther
-											img(src='/student/images/auther-1.jpg', alt='')
-											h6 Anderia jus
-						.plots
-							.row
-								.col-xs-4
-									a(href='#.')
-										img.img-responsive(src='/student/images/propt-img-1.jpg', alt='')
-								.col-xs-8
-									.pri-info
-										span.sale For Sale
-										a.f-mont(href='#.') $ 13,512,002 3 Bed Room At Newyork
-										p
-											i.fa.fa-map-marker
-											|  Down Street
-										.auther
-											img(src='/student/images/auther-1.jpg', alt='')
-											h6 Anderia jus
-						.plots
-							.row
-								.col-xs-4
-									a(href='#.')
-										img.img-responsive(src='/student/images/propt-img-2.jpg', alt='')
-								.col-xs-8
-									.pri-info
-										span.sale For Sale
-										a.f-mont(href='#.') $ 13,512,002 3 Bed Room At Newyork
-										p
-											i.fa.fa-map-marker
-											|  Down Street
-										.auther
-											img(src='/student/images/auther-1.jpg', alt='')
-											h6 Anderia jus
-						.plots
-							.row
-								.col-xs-4
-									a(href='#.')
-										img.img-responsive(src='/student/images/propt-img-3.jpg', alt='')
-								.col-xs-8
-									.pri-info
-										span.sale For Sale
-										a.f-mont(href='#.') $ 13,512,002 3 Bed Room At Newyork
-										p
-											i.fa.fa-map-marker
-											|  Down Street
-										.auther
-											img(src='/student/images/auther-1.jpg', alt='')
-											h6 Anderia jus
 			block nav
 			
 			block content

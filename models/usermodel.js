@@ -90,6 +90,16 @@ module.exports = {
       callback(err, rows);
     });
   },
+  // 首页显示未出售的最新的六个物品
+  homeGetNewWuPin: function(callback) {
+    var sql = "select * from wupin where gmstudentid = 0 order by id desc limit 0, 6;";
+    db.exec(sql, '', function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
   // 浏览显示未出售的二手物品（按分类）
   getAllFenLeiWuPin: function(fenleiid, callback) {
     var sql = "select * from wupin where fenleiid = ? and gmstudentid = 0;";
@@ -102,7 +112,7 @@ module.exports = {
   },
   // 查看某个二手物品详情
   getThisWuPin: function(id, callback) {
-    var sql = "select wupin.*, student.nicheng, student.phone, student.touxiang from wupin left join student on wupin.studentid = student.id where id = ?;";
+    var sql = "select wupin.*, student.nicheng, student.phone, student.touxiang from wupin left join student on wupin.studentid = student.id where wupin.id = ?;";
     db.exec(sql, id, function(err, rows) {
       if (err) {
         callback(err);
@@ -140,13 +150,33 @@ module.exports = {
       callback(err);
     });
   },
+  // 查看该物品是否已经预定
+  isYuDing: function(wupinid, studentid, callback) {
+    var sql = "select * from yuding where wupinid = ? and studentid = ?;";
+    db.exec(sql, [wupinid, studentid], function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 取消预定
+  removeyuDingWuPin: function(yudingid, callback) {
+    var sql = "delete from yuding where id = ?;";
+    db.exec(sql, yudingid, function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
   // 查看个人物品（type=0为未出售，type=1为已出售）
   getMyWuPin: function(studentid, type, callback) {
     var sql;
     if (type == 0) {
       sql = "select * from wupin where studentid = ? and gmstudentid = 0;";
     } else {
-      sql = "select wupin.*, student.nicheng, student.phone from wupin left join student on wupin.gmstudentid = student.id where student.id = ? and wupin.gmstudentid != 0;";
+      sql = "select wupin.*, student.nicheng as gmnicheng, student.phone as gmphone from wupin left join student on wupin.gmstudentid = student.id where wupin.studentid = ? and wupin.gmstudentid != 0;";
     }
     db.exec(sql, studentid, function(err, rows) {
       if (err) {
@@ -167,12 +197,72 @@ module.exports = {
   },
   // 显示所有寻物
   getXunWu: function(callback) {
-    var sql = "select xunwu.*, student.nicheng, student.phone from xunwu left join student on xunwu.studentid = student.id;";
+    var sql = "select xunwu.*, student.nicheng, student.touxiang from xunwu left join student on xunwu.studentid = student.id;";
     db.exec(sql, '', function(err, rows) {
       if (err) {
         callback(err);
       }
       callback(err, rows);
     });
-  }
+  },
+  // 按名字查询未出售的物品
+  getWuPinByname: function(wupin, callback) {
+    var sql = "select * from wupin where name like '%" + wupin + "%' and gmstudentid = 0;";
+    db.exec(sql, '', function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 查询某分类下的所有物品
+  getWuPinByfenlei: function(fenleiid, callback) {
+    var sql = "select * from wupin where fenleiid = ?;";
+    db.exec(sql, fenleiid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 查看我的预定
+  getMyYuDing: function(studentid, callback) {
+    var sql = "select wupin.* from yuding left join wupin on yuding.wupinid = wupin.id where yuding.studentid = ?;";
+    db.exec(sql, studentid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 查看我买到的物品
+  getMyGouMai: function(studentid, callback) {
+    var sql = "select * from wupin where gmstudentid = ?;";
+    db.exec(sql, studentid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 查看已预订用户
+  getYuDingUser: function(wupinid, callback) {
+    var sql = "select student.* from yuding left join student on yuding.studentid = student.id where wupinid = ?;";
+    db.exec(sql, wupinid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 出售物品
+  chushouWuPin: function(gmstudentid, wupinid, callback) {
+    var sql = "update wupin set gmstudentid = ? where id = ?;";
+    db.exec(sql, [gmstudentid, wupinid], function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
 }

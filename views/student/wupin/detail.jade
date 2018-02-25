@@ -1,0 +1,102 @@
+extends ../layout
+
+block nav
+  +topnav
+
+block content
+  +smallnav('物品详情')
+  section.properti-detsil
+    .container
+      .row
+        .col-sm-9
+          img.img-responsive(src= wupinInfo.img, alt='')
+          section
+            each fenleiitem in fenleiList
+              - if (fenleiitem.id == wupinInfo.fenleiid)
+                span.sale-tag.font-montserrat= fenleiitem.name
+            span.sale-tag.price.font-montserrat ￥#{wupinInfo.price}
+            - if (wupinInfo.gmstudentid == 0 && usertype == 'student')
+              - if (uid != wupinInfo.studentid)
+                - if (isYuDing.length == 0)
+                  span.sale-tag.font-montserrat.btn-addyuding(data-wupinid= wupinInfo.id, style='cursor: pointer;') 预定物品
+                - else
+                  span.sale-tag.font-montserrat.btn-removeyuding(data-yudingid= isYuDing[0].id, style='cursor: pointer;') 您已预定，取消预定
+            - if (wupinInfo.gmstudentid == uid && wupinInfo.gmstudentid != 0 && usertype == 'student')
+              span.sale-tag.font-montserrat 您已购买该物品
+          p 物品简介：#{wupinInfo.introduce}
+          section.info-property
+            h5.tittle-head 详情
+            .inner
+              .row
+                .col-sm-2
+                  img(style='width: 91px; height: 91px;', src= wupinInfo.touxiang, alt='')
+                .col-sm-10
+                  ul.row
+                    li.col-sm-4
+                      p
+                        span.font-montserrat 用户昵称：
+                        | #{wupinInfo.nicheng}
+                      p
+                        span.font-montserrat 物品名：
+                        | #{wupinInfo.name}
+                    li.col-sm-4
+                      p
+                        span.font-montserrat 用户联系方式：
+                        | #{wupinInfo.phone}
+                      p
+                        span.font-montserrat 该物品预订人数：
+                        | #{yudingUserList.length}
+          - if (usertype == 'student')
+            section.info-property.location
+              h5.tittle-head 发表评论
+              .inner
+                ul
+                  li
+                    label 评论内容
+                    input(style='width: 100%; color: #989898;height: 40px;padding: 0 10px;border: 1px solid #ececec;', type='text', name='liuyancontent')
+                  li
+                    input.btn.btn-addliuyan(data-wupinid= wupinInfo.id, type='button', value='发表评论')
+          section.info-property.agents-info
+            h5.tittle-head 物品评论
+            - if (liuyanList.length > 0)
+              .inner
+                each liuyanitem in liuyanList
+                  .row(style='margin-top: 20px;')
+                    .col-sm-2
+                      img.img-responsive(src= liuyanitem.touxiang, alt='')
+                    .col-sm-10
+                      h5 #{liuyanitem.nicheng}
+                      p #{liuyanitem.content}
+            - else
+              .no-datacon
+                .no-data
+                  img(src='/public/img/no-data.png')
+        .col-sm-3.side-bar
+          .finder
+            .find-sec
+              h5 物品查询
+              ul.row
+                li.col-sm-12
+                  form(action='/wupinlist', method='post')
+                    input(style='width: 100%;height: 39px;border: 1px solid #dddddd;', name='wupinname')
+                    input.btn(type='submit', value='查询')
+          - if (wupinInfo.studentid == uid && wupinInfo.gmstudentid == 0)
+            .socil-action.margin-t-40
+              h5 已预定用户（点击出售）
+              hr
+              ul
+                each yudingUseritem in yudingUserList
+                  li.chushouit(data-yudinguid= yudingUseritem.id, data-wupinid= wupinInfo.id, style='width: 100%;')
+                    a.fb(href='javascript:;')
+                      i.fa.fa-user
+                      | #{yudingUseritem.nicheng} 联系方式：#{yudingUseritem.phone}
+
+
+block footer
+  +footer
+
+block js
+  script.
+    //- $(function() {
+    //- 	$('.topnavli').eq(3).addClass('active');
+    //- });

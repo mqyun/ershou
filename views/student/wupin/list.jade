@@ -1,0 +1,41 @@
+extends ../layout
+
+block nav
+  +topnav(true)
+
+block content
+  +smallnav(smalltip)
+  section.what-we-do.properties.white-bg
+    .container
+      - if (wupinList.length > 0)
+        ul.row
+          each wupinitem in wupinList
+            li.col-sm-4
+              each fenleiitem in fenleiList
+                if (wupinitem.fenleiid == fenleiitem.id)
+                  span.tag.font-montserrat.rent= fenleiitem.name
+              section
+                .img
+                  img.img-responsive(src= wupinitem.img, alt='')
+                  .over-proper
+                    a.btn.font-montserrat(href='/detail/' + wupinitem.id) 查看详情
+                .detail-sec
+                  a.font-montserrat(href='javascript:;') #{wupinitem.name}
+                  p #{wupinitem.introduce.substring(0, 40)}
+                    - if (wupinitem.introduce.length > 40)
+                      | ......
+                  br
+                  .share-p
+                    span.price.font-montserrat ￥#{wupinitem.price}
+                    i.fa.fa-star-o
+                    i.fa.fa-share-alt
+      - else
+        .no-datacon
+          .no-data
+            img(src='/public/img/no-data.png')
+            
+block js
+  script.
+    //- $(function() {
+    //- 	$('.topnavli').eq(3).addClass('active');
+    //- });

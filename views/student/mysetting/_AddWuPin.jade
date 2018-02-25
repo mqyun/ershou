@@ -1,1 +1,41 @@
-p aaa
+section.properti-detsil.register(style='padding-top: 0')
+  .container
+    .row
+      .col-sm-12
+        .row
+          .col-sm-8.col-sm-offset-2.wupininfo-view
+            .regi-sec
+              span.regi-tag 物品基本信息
+              form
+                ul
+                  li
+                    label
+                      | 物品名
+                      input(type='text', name='name')
+                  li
+                    label
+                      | 物品简介
+                      input(type='text', name='introduce')
+                  li
+                    label
+                      | 物品价格
+                      input(type='text', name='price')
+                  li
+                    label
+                      | 物品分类
+                      select(name='fenlei')
+                        each fenleiitem in fenleiList
+                          option(value= fenleiitem.id)= fenleiitem.name
+                  li
+                    input.btn.btn-addwupininfo(type='button', value='添加物品基本信息')
+          .col-sm-8.col-sm-offset-2.uploadimg-view(style='display: none;')
+            .regi-sec
+              span.regi-tag 上传图片
+              form(method='post', action='/uploadImg', enctype='multipart/form-data')
+                ul
+                  li
+                    label
+                      | 物品图片
+                      input(type='file', name='wupinimg')
+                  li
+                    input.btn.btn-uploadwupinimg(type='submit', value='上传图片')

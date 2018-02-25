@@ -1,0 +1,35 @@
+extends ../layout
+
+block nav
+  +topnav
+
+block content
+  +smallnav('寻物信息')
+  section.properti-detsil
+    .container
+      .row
+        .col-sm-9
+          .blog-page
+            section.blog.no-padding
+              ul.row
+                each xunwuitem in xunwuList
+                  li.col-sm-12
+                    .post-admin
+                      img(src= xunwuitem.touxiang, alt='')
+                      h6 #{xunwuitem.nicheng}
+                    p #{xunwuitem.content}
+        .col-sm-3.side-bar
+          .finder
+            .find-sec
+              h5 发布寻物信息
+              ul.row
+                li.col-sm-12
+                  input(style='width: 100%;height: 39px;border: 1px solid #dddddd;', name='xunwucontent')
+                li.col-sm-12
+                  button.btn.btn-addxunwu 发布
+
+block js
+  script.
+    $(function() {
+      $('.topnavli').eq(1).addClass('active');
+    });
