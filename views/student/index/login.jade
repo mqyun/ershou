@@ -1,0 +1,31 @@
+extends ../layout
+
+block nav
+	+topnav
+
+block content
+	+smallnav('登录')
+	section.properti-detsil.register
+		.container
+			.row
+				.col-sm-12
+					.row
+						.col-sm-6.col-sm-offset-3
+							.regi-sec
+								span.regi-tag 登录
+								form
+									ul
+										li
+											label
+												| 账号(学号)
+												input(type='text', name='account')
+										li
+											label
+												| 密码
+												input(type='password', name='password')
+										li
+											input.btn.btn-login(type='button', value='登录')
+										li(style='text-align: center;')
+											a(href='/reg') 没有账号？立即注册 ==>
+block footer
+	+footer

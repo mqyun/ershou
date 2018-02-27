@@ -46,6 +46,10 @@ block content
                       p
                         span.font-montserrat 该物品预订人数：
                         | #{yudingUserList.length}
+                    li.col-sm-4
+                      p
+                        span.font-montserrat 物品上架时间：
+                        | #{wupinInfo.addtime}
           - if (usertype == 'student')
             section.info-property.location
               h5.tittle-head 发表评论
@@ -65,7 +69,8 @@ block content
                     .col-sm-2
                       img.img-responsive(src= liuyanitem.touxiang, alt='')
                     .col-sm-10
-                      h5 #{liuyanitem.nicheng}
+                      h5 #{liuyanitem.nicheng} 
+                        span(style='font-size: 12px;') 评论时间：#{liuyanitem.addtime}
                       p #{liuyanitem.content}
             - else
               .no-datacon
@@ -94,9 +99,3 @@ block content
 
 block footer
   +footer
-
-block js
-  script.
-    //- $(function() {
-    //- 	$('.topnavli').eq(3).addClass('active');
-    //- });

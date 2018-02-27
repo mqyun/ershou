@@ -52,7 +52,7 @@ module.exports = {
   },
   // 发布二手物品
   addWuPin: function(name, introduce, price, fenleiid, studentid, callback) {
-    var sql = "insert into wupin(name, introduce, price, fenleiid, studentid) values(?,?,?,?,?);";
+    var sql = "insert into wupin(name, introduce, price, fenleiid, studentid, addtime) values(?,?,?,?,?,now());";
     db.exec(sql, [name, introduce, price, fenleiid, studentid], function(err, rows) {
       if (err) {
         callback(err);
@@ -122,7 +122,7 @@ module.exports = {
   },
   // 给物品留言
   addLiuYan: function(content, wupinid, studentid, callback) {
-    var sql = "insert into liuyan(content, wupinid, studentid) values(?,?,?);";
+    var sql = "insert into liuyan(content, wupinid, studentid, addtime) values(?,?,?,now());";
     db.exec(sql, [content, wupinid, studentid], function(err) {
       if (err) {
         callback(err);
@@ -132,7 +132,7 @@ module.exports = {
   },
   // 显示所有留言信息
   getLiuYan: function(wupinid, callback) {
-    var sql = "select liuyan.content, student.nicheng, student.touxiang from liuyan left join student on liuyan.studentid = student.id where liuyan.wupinid = ?;";
+    var sql = "select liuyan.*, student.nicheng, student.touxiang from liuyan left join student on liuyan.studentid = student.id where liuyan.wupinid = ?;";
     db.exec(sql, wupinid, function(err, rows) {
       if (err) {
         callback(err);
@@ -217,7 +217,7 @@ module.exports = {
   },
   // 查询某分类下的所有物品
   getWuPinByfenlei: function(fenleiid, callback) {
-    var sql = "select * from wupin where fenleiid = ?;";
+    var sql = "select * from wupin where fenleiid = ? and gmstudentid = 0;";
     db.exec(sql, fenleiid, function(err, rows) {
       if (err) {
         callback(err);
@@ -227,7 +227,7 @@ module.exports = {
   },
   // 查看我的预定
   getMyYuDing: function(studentid, callback) {
-    var sql = "select wupin.* from yuding left join wupin on yuding.wupinid = wupin.id where yuding.studentid = ?;";
+    var sql = "select wupin.* from yuding right join wupin on yuding.wupinid = wupin.id where yuding.studentid = ?;";
     db.exec(sql, studentid, function(err, rows) {
       if (err) {
         callback(err);
@@ -263,6 +263,36 @@ module.exports = {
         callback(err);
       }
       callback(err);
+    });
+  },
+  // 查看寻物详情
+  getThisXunWu: function(xunwuid, callback) {
+    var sql = "select xunwu.*, student.nicheng, student.touxiang from xunwu right join student on xunwu.studentid = student.id where xunwu.id = ?;";
+    db.exec(sql, xunwuid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 给寻物留言
+  addxunwuLiuYan: function(content, xunwuid, studentid, callback) {
+    var sql = "insert into xunwuliuyan(content, xunwuid, studentid, addtime) values(?,?,?,now());";
+    db.exec(sql, [content, xunwuid, studentid], function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
+  // 显示所有留言信息
+  getxunwuLiuYan: function(xunwuid, callback) {
+    var sql = "select xunwuliuyan.*, student.nicheng, student.touxiang from xunwuliuyan left join student on xunwuliuyan.studentid = student.id where xunwuliuyan.xunwuid = ?;";
+    db.exec(sql, xunwuid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
     });
   },
 }

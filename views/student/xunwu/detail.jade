@@ -1,0 +1,63 @@
+extends ../layout
+
+block nav
+  +topnav
+
+block content
+  +smallnav('寻物详情')
+  section.properti-detsil
+    .container
+      .row
+        .col-sm-9
+          p 寻物内容：#{xunwuInfo.content}
+          section.info-property
+            h5.tittle-head 详情
+            .inner
+              .row
+                .col-sm-2
+                  img(style='width: 91px; height: 91px;', src= xunwuInfo.touxiang, alt='')
+                .col-sm-10
+                  ul.row
+                    li.col-sm-4
+                      p
+                        span.font-montserrat 用户昵称：
+                        | #{xunwuInfo.nicheng}
+          - if (usertype == 'student')
+            section.info-property.location
+              h5.tittle-head 发表评论
+              .inner
+                ul
+                  li
+                    label 评论内容
+                    input(style='width: 100%; color: #989898;height: 40px;padding: 0 10px;border: 1px solid #ececec;', type='text', name='liuyancontent')
+                  li
+                    input.btn.btn-addxunwuliuyan(data-xunwuid= xunwuInfo.id, type='button', value='发表评论')
+          section.info-property.agents-info
+            h5.tittle-head 寻物回复
+            - if (liuyanList.length > 0)
+              .inner
+                each liuyanitem in liuyanList
+                  .row(style='margin-top: 20px;')
+                    .col-sm-2
+                      img.img-responsive(src= liuyanitem.touxiang, alt='')
+                    .col-sm-10
+                      h5 #{liuyanitem.nicheng} 
+                        span(style='font-size: 12px;') 评论时间：#{liuyanitem.addtime}
+                      p #{liuyanitem.content}
+            - else
+              .no-datacon
+                .no-data
+                  img(src='/public/img/no-data.png')
+        .col-sm-3.side-bar
+          .finder
+            .find-sec
+              h5 物品查询
+              ul.row
+                li.col-sm-12
+                  form(action='/wupinlist', method='post')
+                    input(style='width: 100%;height: 39px;border: 1px solid #dddddd;', name='wupinname')
+                    input.btn(type='submit', value='查询')
+
+
+block footer
+  +footer

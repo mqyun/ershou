@@ -18,8 +18,14 @@ $(document).on('click', '.btn-reg', function() {
     'nicheng': nicheng,
     'name': name
   }
+  var yzaccount = /^\d{10}$/;
+  var yzphone = /^1[34578]\d{9}$/;
   if (account.length == 0 || password.length == 0 || repassword != password || phone.length == 0 || nicheng.length == 0 || name.length == 0) {
-    showTips('warning', 'Warning!', '请检查注册信息!');
+    showTips('warning', 'Warning!', '注册信息填写不完整!');
+  } else if (!yzaccount.test(account)) {
+    showTips('warning', 'Warning!', '请填写正确的学号');
+  } else if (!yzphone.test(phone)) {
+    showTips('warning', 'Warning!', '请填写正确的手机号');
   } else {
     ajaxPost('/reg', data, function(result) {
       if (result.success) {
@@ -261,5 +267,27 @@ $(document).on('click', '.btn-addxunwu', function() {
   			}
   		});
   	});
+  }
+});
+
+// 发表寻物留言
+$(document).on('click', '.btn-addxunwuliuyan', function() {
+  var liuyancontent = $('input[name="liuyancontent"]').val();
+  var xunwuid = $(this).data('xunwuid');
+  var data = {
+    'liuyancontent': liuyancontent,
+    'xunwuid': xunwuid
+  }
+  if (liuyancontent.length == 0) {
+    showTips('warning', 'Warning!', '留言不能为空！');
+  } else {
+    ajaxPost('/addxunwuLiuYan', data, function(result) {
+      if (result.success) {
+        showTips('success', '\n', result.success);
+        setTimeout(function() {
+          location.reload();
+        }, 1500);
+      }
+    });
   }
 });
